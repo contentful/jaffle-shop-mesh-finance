@@ -1,5 +1,6 @@
 projects:
   - name: jaffle_shop_mesh_platform
+  - name: jaffle_shop_mesh_marketing
 
 packages:
   - package: dbt-labs/dbt_utils

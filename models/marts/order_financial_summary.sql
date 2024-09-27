@@ -12,6 +12,12 @@ order_items_table as (
 
 ),
 
+locations as (
+
+    select * from {{ ref('jaffle_shop_mesh_marketing', 'locations') }}
+
+),
+
 order_items_summary as (
 
     select
@@ -35,15 +41,18 @@ compute_booleans as (
     select
 
         orders.*,
+        locations.location_name,
         order_items_summary.order_cost,
         order_items_summary.count_food_items > 0 as is_food_order,
         order_items_summary.count_drink_items > 0 as is_drink_order
 
     from orders
 
-    left join
-        order_items_summary
+    left join order_items_summary
         on orders.order_id = order_items_summary.order_id
+
+    left join locations
+        on orders.location_id = locations.location_id
 )
 
-select * from compute_booleans
+select location_name, count(*) from compute_booleans group by 1
