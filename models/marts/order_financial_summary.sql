@@ -55,4 +55,4 @@ compute_booleans as (
         on orders.location_id = locations.location_id
 )
 
-select location_name, count(*) from compute_booleans group by 1
+select * from compute_booleans
