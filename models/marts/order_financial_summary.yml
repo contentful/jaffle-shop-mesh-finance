@@ -1,0 +1,39 @@
+models:
+  - name: order_financial_summary
+    description: Order overview data mart, offering details of Finance interest for each order including if it's a customer's first order and a food vs. drink item breakdown. One row per order.
+    group: finance
+    columns:
+      - name: order_id
+        data_type: text
+        description: The unique key of the orders mart.
+        data_tests:
+          - not_null
+          - unique
+      - name: location_name
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Philadelphia', 'Brooklyn', 'Las Vegas']
+
+unit_tests:
+  - name: correctly_count_food_drink_items
+    model: order_financial_summary
+    given:
+      - input: ref('jaffle_shop_mesh_platform', 'orders')
+        rows:
+          - {order_id: 1} # food and drink
+          - {order_id: 2} # food no drink
+          - {order_id: 3} # drink no food
+      - input: ref('order_items')
+        rows:
+          - {order_id: 1, is_food_item: true, is_drink_item: false}
+          - {order_id: 1, is_food_item: false, is_drink_item: true}
+          - {order_id: 2, is_food_item: true, is_drink_item: false}
+          - {order_id: 3, is_food_item: false, is_drink_item: true}
+      - input: ref('jaffle_shop_mesh_marketing', 'locations')
+        rows: []
+    expect:
+      rows:
+          - {order_id: 1, is_food_order: true, is_drink_order: true}
+          - {order_id: 2, is_food_order: true, is_drink_order: false}
+          - {order_id: 3, is_food_order: false, is_drink_order: true}

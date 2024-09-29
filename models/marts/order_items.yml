@@ -15,12 +15,12 @@ models:
       - name: product_id
         data_type: text
       - name: product_price
-        data_type: number
+        data_type: numeric
       - name: supply_cost
-        data_type: number
+        data_type: numeric
       - name: is_food_item
         data_type: boolean
       - name: is_drink_item
         data_type: boolean
       - name: ordered_at
-        data_type: timestamp_ntz
+        data_type: timestamp
