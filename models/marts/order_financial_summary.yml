@@ -6,9 +6,14 @@ models:
       - name: order_id
         data_type: text
         description: The unique key of the orders mart.
-        tests:
+        data_tests:
           - not_null
           - unique
+      - name: location_name
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Philadelphia', 'Brooklyn', 'Las Vegas']
 
 unit_tests:
   - name: correctly_count_food_drink_items
