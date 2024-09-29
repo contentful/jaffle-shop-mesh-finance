@@ -23,9 +23,9 @@ order_items_summary as (
     select
 
         order_id,
-        count(case when is_food_item then 1 else 0 end)
+        sum(case when is_food_item then 1 else 0 end)
             as count_food_items,
-        count(case when is_drink_item then 1 else 0 end)
+        sum(case when is_drink_item then 1 else 0 end)
             as count_drink_items,
 
         sum(supply_cost) as order_cost
