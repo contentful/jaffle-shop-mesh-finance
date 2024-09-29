@@ -14,6 +14,16 @@ models:
           - not_null
           - accepted_values:
               values: ['Philadelphia', 'Brooklyn', 'Las Vegas']
+      - name: order_cost
+        description: The total cost of the order based on the sum of supply costs of all items in the order.
+      - name: count_food_items
+        description: The number of food items in the order.
+      - name: count_drink_items
+        description: The number of drink items in the order.
+      - name: is_food_order
+        description: Indicates if the order contains any food items.
+      - name: is_drink_order
+        description: Indicates if the order contains any drink items.
 
 unit_tests:
   - name: correctly_count_food_drink_items
