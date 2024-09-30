@@ -1,9 +1,5 @@
 name: jaffle_shop_mesh_finance
 
-vars:
-  truncate_timespan_to: "{{ current_timestamp() }}"
-  dbt_date:time_zone: America/Los_Angeles
-
 models:
   jaffle_shop_mesh_finance:
     marts:
