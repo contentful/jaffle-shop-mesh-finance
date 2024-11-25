@@ -22,7 +22,7 @@ order_items_summary as (
 
     select
 
-        order_id,
+        order_id
         sum(case when is_food_item then 1 else 0 end)
             as count_food_items,
         sum(case when is_drink_item then 1 else 0 end)
